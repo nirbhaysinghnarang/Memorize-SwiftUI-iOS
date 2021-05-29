@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    var emojis:[String] = ["😀","😛","😝","🤩"]
     var body: some View {
         HStack{
-            CardView()
-            CardView()
-            CardView()
-            CardView()
+            ForEach(emojis, id:\.self) { emoji in
+                CardView(content: emoji)
+            }
         }
     }
 }
@@ -27,6 +27,7 @@ struct ContentView_Previews: PreviewProvider {
 
 struct CardView: View {
     @State var isFaceUp:Bool = true
+    var content:String
     var body: some View{
         ZStack(content: {
             let cardShape = Circle()
@@ -39,7 +40,7 @@ struct CardView: View {
                      .stroke(lineWidth: 3).fill()
                      .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
                     .padding(10)
-                 Text("🥰").font(.largeTitle).foregroundColor(.red)
+                 Text(content).font(.largeTitle).foregroundColor(.red)
             }else{
                 cardShape
                     .fill()
